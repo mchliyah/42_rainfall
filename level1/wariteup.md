@@ -1,22 +1,5 @@
-1. here we go the password to the next level ssh to level1 we found:
+# level1
 
-```bash
-level1@RainFall:~$ ls
-level1
-level1@RainFall:~$ 
-```
-
-ghidra shows :
-
-```bash
-void main(void)
-{
-char local_50 [76];
-
-gets(local_50);
-return;
-}
-```
 
 the programe expect a 76 length char input using gets then return there is a function in the programe named run () at 08048444:
 
@@ -27,7 +10,7 @@ the programe expect a 76 length char input using gets then return there is a fun
 0804847f        return system(line: "/bin/sh")
 ```
 
-it return  return system(line: "/bin/sh") we got to run is
+it return system(line: "/bin/sh") we got to run it
 
 \-> overflow fill the buffer + the run adress  and pass command that hand on the /bin/sh sense it return it :
 

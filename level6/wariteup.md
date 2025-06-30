@@ -1,3 +1,4 @@
+# level6
 level6@RainFall:~$ file level6 
 level6: setuid setgid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.24, BuildID[sha1]=0xb1a5ce594393de0f273c64753cede6da01744479, not stripped
 
@@ -33,8 +34,6 @@ Dump of assembler code for function main:
    0x080484d2 <+86>:	leave  
    0x080484d3 <+87>:	ret    
 End of assembler dump.
-(gdb) info f
-No stack.
 (gdb) info function
 All defined functions:
 
@@ -92,6 +91,7 @@ load the address of m into edx "the 4 allocation"
 
 so the program reserve a memory space of 64 byte, and then it coppy the input expected with strcoppy to it and calls the function `m` but the n function is not being called .
 
+```bash
 (gdb) disas m 
 Dump of assembler code for function m:
    0x08048468 <+0>:	push   %ebp
@@ -112,7 +112,7 @@ Dump of assembler code for function n:
    0x08048466 <+18>:	leave  
    0x08048467 <+19>:	ret    
 End of assembler dump.
-
+```
 
 
 let check the argument passed to the system call which is 0x80485b0 content:

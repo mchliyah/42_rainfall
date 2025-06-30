@@ -284,7 +284,7 @@ Starting program: /home/user/level9/level9 $(python -c 'print "\x10\xa0\x04\x08\
 Breakpoint 1, 0x0804868c in main ()
 (gdb) info proc map
 process 3756
-Mapped address spaces:
+Mapped address spaces:memcpy
 
 	Start Addr   End Addr       Size     Offset objfile
 	 0x8048000  0x8049000     0x1000        0x0 /home/user/level9/level9

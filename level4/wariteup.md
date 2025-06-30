@@ -1,6 +1,6 @@
 level4 exploit
 
-   ```bahs
+   ```bash
    ssh level4@<ip>
     System-wide ASLR (kernel.randomize_va_space): Off (Setting: 0)
    RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
@@ -8,50 +8,11 @@ level4 exploit
    level4@RainFall:~$ 
    ```
 
-by ghidra we have :
-
-the main call n function 
-
-```
-void main(void)
-
-{
-  n();
-  return;
-}
-```
-
-which call p function 
-
-```
-void n(void)
-
-{
-  char local_20c [520];
-  
-  fgets(local_20c,0x200,stdin);
-  p(local_20c);
-  if (m == 0x1025544) {
-    system("/bin/cat /home/user/level5/.pass");
-  }
-  return;
-}
-
-
-
-void p(char *param_1)
-
-{
-  printf(param_1);
-  return;
-}
-```
-
 the p function print the param_1 which is the local_20c a buffer of 520 byt 
 
 wee need to get to the m variable globale variable which must be 16930116 to get the seystem executed 
 
-```
+```bash
 ### GDB Disassembly with Comments for level4 ###
 
 # Function: main

